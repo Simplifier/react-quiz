@@ -5,7 +5,7 @@ import Answer from './Answer';
 const Question = ({ question, answers, handleAnswerClick, handleEnterPress }) => {
   return (
     <li className="question">
-      <h2 className="question-title" tabIndex="0">
+      <h2 className="question-title">
         {question}
       </h2>
       <ul className="question-answers" tabIndex="-1">

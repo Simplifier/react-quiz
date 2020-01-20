@@ -39,5 +39,7 @@
     "test",
     "react-component"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "prismjs": "^1.19.0"
+  }
 }
