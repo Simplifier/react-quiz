@@ -19,18 +19,16 @@ class QuizApp extends Component {
     getInitialState(totalQuestions) {
         totalQuestions = Math.min(totalQuestions, QUESTION_DATA.length);
         const QUESTIONS = shuffleQuestions(QUESTION_DATA)
-            .slice(0, totalQuestions)
-            .map(q => { // shallow copy
-                return {...q};
-            });
+            .slice(0, totalQuestions) // take totalQuestions questions
+            .map(q => ({...q})); // shallow copy
 
         QUESTIONS.forEach(q => {
             if (!q.shuffle) {
                 return;
             }
-            let shuffled = shuffleQuestions([...Array(q.answers.length).keys()]);
-            q.correct = shuffled.indexOf(q.correct);
-            q.answers = sortInOrder(q.answers, shuffled);
+            let shuffledIndices = shuffleQuestions([...Array(q.answers.length).keys()]);
+            q.correct = shuffledIndices.indexOf(q.correct);
+            q.answers = sortInOrder(q.answers, shuffledIndices);
         });
 
         return {

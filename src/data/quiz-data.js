@@ -57,9 +57,9 @@ const QUESTION_DATA = [
     return Math.Sqrt(x * x + y * y);
   }
 }`}</code></pre>
-                <div>И вне его создана переменная</div>
+                <div>И вне его создана переменная <code className="lang-java">Vector v = new Vector();</code></div>
 
-                <pre><code className="lang-java">{`Vector v = new Vector();`}</code></pre>
+
 
                 <div>Выберите варианты кода, которые скомпилируются без ошибок</div>
 
