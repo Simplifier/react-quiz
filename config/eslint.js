@@ -32,7 +32,7 @@ module.exports = {
   },
 
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2019,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
