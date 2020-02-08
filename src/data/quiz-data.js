@@ -1,7 +1,9 @@
 import React from 'react';
+import QuestionType from "./QuestionType";
 
 const QUESTION_DATA = [
     {
+        type: QuestionType.SINGLE,
         question:
             <div>
                 <div>Определен класс</div>
@@ -11,10 +13,9 @@ const QUESTION_DATA = [
 }`}</code></pre>
 
                 <div>Как создать его экземпляр?</div>
-
             </div>,
         answers: [
-            <pre><code className="lang-java">{`new Vector();`}</code></pre>,
+            <div><pre><code className="lang-java">{`new Vector();`}</code></pre><div>lol</div></div>,
             <pre><code className="lang-java">{`Vector();`}</code></pre>,
             <pre><code className="lang-java">{`new Vector;`}</code></pre>,
             <pre><code className="lang-java">{`Vector;`}</code></pre>
@@ -24,6 +25,7 @@ const QUESTION_DATA = [
     },
     ///////////////////////////////////////////////////
     {
+        type: QuestionType.SINGLE,
         question:
             <div>
                 <div>Определен класс</div>
@@ -33,7 +35,6 @@ const QUESTION_DATA = [
 }`}</code></pre>
 
                 <div>Выберите корректный способ сохранения экземпляра этого класса в переменную</div>
-
             </div>,
         answers: [
             <pre><code className="lang-java">{`Vector vector = new Vector();`}</code></pre>,
@@ -46,6 +47,7 @@ const QUESTION_DATA = [
     },
     ///////////////////////////////////////////////////
     {
+        type: QuestionType.MULTI,
         question:
             <div>
                 <div>Определен класс</div>
@@ -59,14 +61,11 @@ const QUESTION_DATA = [
 }`}</code></pre>
                 <div>И вне его создана переменная <code className="lang-java">Vector v = new Vector();</code></div>
 
-
-
                 <div>Выберите варианты кода, которые скомпилируются без ошибок</div>
-
             </div>,
         answers: [
             <pre><code className="lang-java">{`print(Vector.magnitude());`}</code></pre>,
-            <pre><code className="lang-java">{`print(x);`}</code></pre>,
+            <div><pre><code className="lang-java">{`print(x);`}</code></pre><div>lol</div></div>,
             <pre><code className="lang-java">{`print(v.Magnitude());`}</code></pre>,
             <pre><code className="lang-java">{`print(v.x);`}</code></pre>,
             <pre><code className="lang-java">{`print(Vector.y);`}</code></pre>

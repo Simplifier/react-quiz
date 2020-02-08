@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Answer from './Answer';
+import SingleAnswer from './SingleAnswer';
 
-const Question = ({ question, answers, handleAnswerClick, handleEnterPress }) => {
+const SingleChoiceQuestion = ({ question, answers, handleAnswerClick, handleEnterPress }) => {
   return (
     <li className="question">
       <h2 className="question-title">
@@ -11,24 +11,28 @@ const Question = ({ question, answers, handleAnswerClick, handleEnterPress }) =>
       <ul className="question-answers" tabIndex="-1">
         {answers.map((answer, index) => {
           return (
-            <Answer
+            <SingleAnswer
               key={JSON.stringify(answer.props.children)}
               answer={answer}
               handleAnswerClick={handleAnswerClick(index)}
-              handleEnterPress={handleEnterPress(index)}
+              handleEnterPress={(e) => {
+                  if (e.keyCode === 13) {
+                      this.handleAnswerClick(index)(e);
+                  }
+              }}
             />
           );
         })}
       </ul>
     </li>
   );
-}
+};
 
-Question.propTypes = {
+SingleChoiceQuestion.propTypes = {
   question: PropTypes.element.isRequired,
   answers: PropTypes.array.isRequired,
   handleAnswerClick: PropTypes.func.isRequired,
   handleEnterPress: PropTypes.func.isRequired
 };
 
-export default Question;
+export default SingleChoiceQuestion;

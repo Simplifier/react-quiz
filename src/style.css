@@ -54,10 +54,10 @@ code {
     pointer-events: none;
 }
 
-pre {
-    font-size: .9em !important;
-    padding: 0.5em !important;
-    pointer-events: none;
+pre[class*="language-"] {
+    margin: 0 0 .5em;
+    font-size: .9em;
+    padding: 0.5em;
 }
 
 .token.operator {
@@ -102,20 +102,105 @@ pre {
     padding-left: 1.2em;
 }
 
+.multi-answers {
+    margin-top: .75em;
+}
+
 .question-answer {
     list-style-type: lower-alpha;
     cursor: pointer;
     padding: .3em;
     margin-bottom: .3em;
-    border: 5px solid transparent;
+    border: .25em solid transparent;
 }
 
 .question-answer span {
     line-height: 1.3;
 }
 
-.answer {
+.question-answer > * {
+    pointer-events: none;
+}
+
+/* Customize the label (the multi-answer) */
+.multi-answer {
+    display: block;
+    position: relative;
+    padding-left: 50px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.multi-answer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: .55em;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    border: 3px solid #aaaaaa;
+    box-sizing: border-box;
+}
+
+/* When the checkbox is checked, add a green border */
+.multi-answer input:checked ~ .checkmark {
+    border: 3px solid #67b34e;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Style the checkmark/indicator */
+.multi-answer .checkmark::after {
+    left: 10px;
+    top: 3px;
+    width: 10px;
+    height: 20px;
+    border: solid #67b34e;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Show the checkmark when checked */
+.multi-answer input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.submit-answer {
+    vertical-align: middle;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    text-align: center;
+    border: 0;
+    padding: .75em 1.5em;
     font-size: 1em;
+    background-color: #67b34e;
+    color: #fff;
+    user-select: none;
+}
+
+.submit-answer:hover {
+    background-color: #529545;
 }
 
 @keyframes slide-in {
@@ -300,6 +385,10 @@ pre {
 
     .question-answer:focus {
         outline: gray solid 1px;
+    }
+
+    .submit-answer:focus {
+        outline: gray solid 2px;
     }
 
     .panel {

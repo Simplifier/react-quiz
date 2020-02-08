@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Answer = ({ answer, handleAnswerClick, handleEnterPress }) => {
+const SingleAnswer = ({ answer, handleAnswerClick, handleEnterPress }) => {
   return (
     <li
       className="question-answer"
@@ -12,12 +12,12 @@ const Answer = ({ answer, handleAnswerClick, handleEnterPress }) => {
       {answer}
     </li>
   );
-}
+};
 
-Answer.propTypes = {
+SingleAnswer.propTypes = {
   answer: PropTypes.element.isRequired,
   handleAnswerClick: PropTypes.func.isRequired,
   handleEnterPress: PropTypes.func.isRequired
 };
 
-export default Answer;
+export default SingleAnswer;

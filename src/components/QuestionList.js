@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
-import Question from './Question';
+import SingleChoiceQuestion from './SingleChoiceQuestion';
 import Prism from "prismjs";
+import QuestionType from "../data/QuestionType";
+import MultiChoiceQuestion from "./MultiChoiceQuestion";
 
 class QuestionList extends React.Component {
     componentDidMount() {
@@ -14,7 +16,15 @@ class QuestionList extends React.Component {
             <ul className="question-list">
                 {this.props.questions.map(question => {
                     return (
-                        <Question
+                        question.type === QuestionType.SINGLE ?
+                        <SingleChoiceQuestion
+                            key={ReactDOMServer.renderToString(question.question)}
+                            question={question.question}
+                            answers={question.answers}
+                            handleAnswerClick={this.props.handleAnswerClick}
+                            handleEnterPress={this.props.handleEnterPress}
+                        /> :
+                        <MultiChoiceQuestion
                             key={ReactDOMServer.renderToString(question.question)}
                             question={question.question}
                             answers={question.answers}
