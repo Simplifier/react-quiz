@@ -12,24 +12,23 @@ class QuestionList extends React.Component {
     }
 
     render() {
+        let {questions, handleSingleAnswer, handleMultiAnswer} = this.props;
         return (
             <ul className="question-list">
-                {this.props.questions.map(question => {
+                {questions.map(question => {
                     return (
                         question.type === QuestionType.SINGLE ?
                         <SingleChoiceQuestion
                             key={ReactDOMServer.renderToString(question.question)}
                             question={question.question}
                             answers={question.answers}
-                            handleAnswerClick={this.props.handleAnswerClick}
-                            handleEnterPress={this.props.handleEnterPress}
+                            handleSingleAnswer={handleSingleAnswer}
                         /> :
                         <MultiChoiceQuestion
                             key={ReactDOMServer.renderToString(question.question)}
                             question={question.question}
                             answers={question.answers}
-                            handleAnswerClick={this.props.handleAnswerClick}
-                            handleEnterPress={this.props.handleEnterPress}
+                            handleMultiAnswer={handleMultiAnswer}
                         />
                     );
                 })}
@@ -40,8 +39,8 @@ class QuestionList extends React.Component {
 
 QuestionList.propTypes = {
     questions: PropTypes.array.isRequired,
-    handleAnswerClick: PropTypes.func.isRequired,
-    handleEnterPress: PropTypes.func.isRequired
+    handleSingleAnswer: PropTypes.func.isRequired,
+    handleMultiAnswer: PropTypes.func.isRequired
 };
 
 export default QuestionList;

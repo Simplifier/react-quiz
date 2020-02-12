@@ -6,6 +6,7 @@ import Results from './Results';
 import shuffleQuestions from '../helpers/shuffleQuestions';
 import QUESTION_DATA from '../data/quiz-data';
 import sortInOrder from "../helpers/sortInOrder";
+import QuestionType from "../data/QuestionType";
 
 class QuizApp extends Component {
     state = {
@@ -26,19 +27,22 @@ class QuizApp extends Component {
             if (!q.shuffle) {
                 return;
             }
+
             let shuffledIndices = shuffleQuestions([...Array(q.answers.length).keys()]);
-            q.correct = shuffledIndices.indexOf(q.correct);
+            if (q.type === QuestionType.SINGLE) {
+                q.correct = shuffledIndices.indexOf(q.correct);
+            } else if (q.type === QuestionType.MULTI) {
+                q.correct = q.correct.map(c => shuffledIndices.indexOf(c));
+            }
             q.answers = sortInOrder(q.answers, shuffledIndices);
         });
 
         return {
             questions: QUESTIONS,
             totalQuestions: totalQuestions,
-            userAnswers: QUESTIONS.map(() => {
-                return {
-                    tries: 0
-                }
-            }),
+            userAnswers: QUESTIONS.map(() => ({
+                tries: 0
+            })),
             step: 1,
             score: 0,
             modal: {
@@ -49,48 +53,39 @@ class QuizApp extends Component {
         };
     }
 
-    handleAnswerClick = (index) => (e) => {
-        const {questions, step, userAnswers} = this.state;
-        const isCorrect = questions[0].correct === index;
+    handleSingleAnswer = (selectedIndex) => {
+        let isCorrect = this.state.questions[0].correct === selectedIndex;
+        this.#handleAnswer(isCorrect);
+        return isCorrect;
+    };
+
+    handleMultiAnswer = selectedIndices => {
+        let isCorrect = this.#arraysEqual(this.state.questions[0].correct, selectedIndices);
+        this.#handleAnswer(isCorrect);
+        return isCorrect;
+    };
+
+    #arraysEqual(arrayA, arrayB) {
+        return [...new Set(arrayA)].sort().join() === [...new Set(arrayB)].sort().join();
+    }
+
+    #handleAnswer(isCorrect) {
+        const {step, userAnswers} = this.state;
         const currentStep = step - 1;
         const tries = userAnswers[currentStep].tries;
 
-        if (isCorrect && e.target.nodeName === 'LI') {
-            // Prevent other answers from being clicked after correct answer is clicked
-            e.target.parentNode.style.pointerEvents = 'none';
+        userAnswers[currentStep] = {
+            tries: tries + 1
+        };
+        this.setState({
+            userAnswers: userAnswers
+        });
 
-            e.target.classList.add('right');
-
-            userAnswers[currentStep] = {
-                tries: tries + 1
-            };
-
-            this.setState({
-                userAnswers: userAnswers
-            });
-
+        if (isCorrect) {
             setTimeout(() => this.showModal(tries), 750);
-
             setTimeout(this.nextStep, 2750);
-        } else if (e.target.nodeName === 'LI') {
-            e.target.style.pointerEvents = 'none';
-            e.target.classList.add('wrong');
-
-            userAnswers[currentStep] = {
-                tries: tries + 1
-            };
-
-            this.setState({
-                userAnswers: userAnswers
-            });
         }
-    };
-
-    handleEnterPress = (index) => (e) => {
-        if (e.keyCode === 13) {
-            this.handleAnswerClick(index)(e);
-        }
-    };
+    }
 
     showModal = (tries) => {
         let praise;
@@ -180,8 +175,8 @@ class QuizApp extends Component {
                     questions={questions}
                     totalQuestions={totalQuestions}
                     score={score}
-                    handleAnswerClick={this.handleAnswerClick}
-                    handleEnterPress={this.handleEnterPress}
+                    handleSingleAnswer={this.handleSingleAnswer}
+                    handleMultiAnswer={this.handleMultiAnswer}
                 />
                 {modal.state === 'show' && <Modal modal={modal}/>}
             </Fragment>

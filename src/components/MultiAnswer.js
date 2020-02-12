@@ -1,25 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MultiAnswer = ({answer, handleAnswerClick, handleEnterPress}) => {
-    return (
-        <label className="multi-answer">
-            <div
-                className="question-answer"
-                tabIndex="0"
-                onClick={handleAnswerClick}
-                onKeyDown={handleEnterPress}>{answer}
-            </div>
-            <input type="checkbox"/>
-            <span className="checkmark"/>
-        </label>
-    );
-};
+class MultiAnswer extends React.Component {
+    render() {
+        let {answer} = this.props;
+        return (
+            <label className="multi-answer">
+                <div
+                    className="question-answer"
+                    tabIndex="0"
+                >
+                    {answer}
+                </div>
+                <input type="checkbox" onChange={this.#checkboxChangeHandle}/>
+                <span className="checkmark"/>
+            </label>
+        );
+    }
+
+    #checkboxChangeHandle = e => {
+        let {handleAnswerChange} = this.props;
+        handleAnswerChange(e.target.checked);
+    }
+}
 
 MultiAnswer.propTypes = {
     answer: PropTypes.element.isRequired,
-    handleAnswerClick: PropTypes.func.isRequired,
-    handleEnterPress: PropTypes.func.isRequired
+    handleAnswerChange: PropTypes.func.isRequired
 };
 
 export default MultiAnswer;

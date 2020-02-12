@@ -37,12 +37,12 @@ const QUESTION_DATA = [
                 <div>Выберите корректный способ сохранения экземпляра этого класса в переменную</div>
             </div>,
         answers: [
-            <pre><code className="lang-java">{`Vector vector = new Vector();`}</code></pre>,
             <pre><code className="lang-java">{`void vector = new Vector();`}</code></pre>,
+            <pre><code className="lang-java">{`Vector vector = new Vector();`}</code></pre>,
             <pre><code className="lang-java">{`int vector = new Vector();`}</code></pre>,
             <pre><code className="lang-java">{`string vector = new Vector();`}</code></pre>
         ],
-        correct: 0,
+        correct: 1,
         shuffle: true
     },
     ///////////////////////////////////////////////////
@@ -70,7 +70,7 @@ const QUESTION_DATA = [
             <pre><code className="lang-java">{`print(v.x);`}</code></pre>,
             <pre><code className="lang-java">{`print(Vector.y);`}</code></pre>
         ],
-        correct: 0,
+        correct: [2, 3],
         shuffle: true
     },
 ];
