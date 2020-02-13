@@ -54,13 +54,13 @@ class QuizApp extends Component {
     }
 
     handleSingleAnswer = (selectedIndex) => {
-        let isCorrect = this.state.questions[0].correct === selectedIndex;
+        const isCorrect = this.state.questions[0].correct === selectedIndex;
         this.#handleAnswer(isCorrect);
         return isCorrect;
     };
 
     handleMultiAnswer = selectedIndices => {
-        let isCorrect = this.#arraysEqual(this.state.questions[0].correct, selectedIndices);
+        const isCorrect = this.#arraysEqual(this.state.questions[0].correct, selectedIndices);
         this.#handleAnswer(isCorrect);
         return isCorrect;
     };

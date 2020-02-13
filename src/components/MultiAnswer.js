@@ -7,7 +7,7 @@ class MultiAnswer extends React.Component {
     };
 
     render() {
-        let {answer} = this.props;
+        const {answer} = this.props;
         const {checked} = this.state;
         return (
             <div className="multi-answer" onClick={this.#handleCheckboxClick}>
@@ -22,7 +22,7 @@ class MultiAnswer extends React.Component {
     #handleCheckboxClick = e => {
         this.setState(state => {
             const checked = !state.checked;
-            let {handleAnswerChange} = this.props;
+            const {handleAnswerChange} = this.props;
             handleAnswerChange(checked);
 
             return {checked};

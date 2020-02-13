@@ -16,7 +16,7 @@ class MultiChoiceQuestion extends React.Component {
             correctnessClass = isCorrect ? 'right' : 'wrong';
         }
 
-        let {question, answers} = this.props;
+        const {question, answers} = this.props;
         return (
             <li className={`question ${correctnessClass}`}>
                 <h2 className="question-title">
@@ -38,6 +38,9 @@ class MultiChoiceQuestion extends React.Component {
 
     #handleAnswerChange = index => checked => {
         this.selectedAnswers[index] = {index, checked};
+        this.setState(() => ({
+            answerGiven: false
+        }));
     };
 
     #handleAnswerClick = e => {
