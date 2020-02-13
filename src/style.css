@@ -159,8 +159,7 @@ pre[class*="language-"] {
     box-sizing: border-box;
 }
 
-/* When the checkbox is checked, add a green border */
-.multi-answer input:checked ~ .checkmark {
+.multi-answer .checkmark.checked {
     border: 3px solid #67b34e;
 }
 
@@ -185,7 +184,7 @@ pre[class*="language-"] {
 }
 
 /* Show the checkmark when checked */
-.multi-answer input:checked ~ .checkmark::after {
+.multi-answer .checkmark.checked::after {
     display: block;
 }
 
@@ -265,13 +264,17 @@ pre[class*="language-"] {
     top: -2px;
 }
 
-.wrong {
+.question-answer.wrong, .question.wrong .multi-answers {
     background: rgba(236, 100, 75, .5);
     animation: shake 0.5s cubic-bezier(.35, .05, .20, .99) both;
 }
 
-.right {
+.question-answer.right, .question.right .multi-answers {
     background: rgba(135, 211, 124, .5);
+}
+
+.question.right {
+    pointer-events: none;
 }
 
 @keyframes shake {

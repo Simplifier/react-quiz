@@ -4,11 +4,21 @@ import MultiAnswer from "./MultiAnswer";
 
 class MultiChoiceQuestion extends React.Component {
     selectedAnswers = [];
+    state = {
+        answerGiven: false,
+        isCorrect: false
+    };
 
     render() {
+        const {answerGiven, isCorrect} = this.state;
+        let correctnessClass = '';
+        if (answerGiven) {
+            correctnessClass = isCorrect ? 'right' : 'wrong';
+        }
+
         let {question, answers} = this.props;
         return (
-            <li className="question">
+            <li className={`question ${correctnessClass}`}>
                 <h2 className="question-title">
                     {question}
                 </h2>
@@ -30,20 +40,13 @@ class MultiChoiceQuestion extends React.Component {
         this.selectedAnswers[index] = {index, checked};
     };
 
-    #handleAnswerClick = (e) => {
+    #handleAnswerClick = e => {
         const selected = this.selectedAnswers.filter(a => a.checked).map(a => a.index);
         const isCorrect = this.props.handleMultiAnswer(selected);
-
-        const answers = e.target.parentElement.querySelector('.multi-answers');
-        answers.classList.remove('right', 'wrong');
-        if (isCorrect) {
-            // Prevent other answers from being clicked after correct answer is clicked
-            e.target.parentNode.style.pointerEvents = 'none';
-
-            answers.classList.add('right');
-        } else {
-            answers.classList.add('wrong');
-        }
+        this.setState(() => ({
+            answerGiven: true,
+            isCorrect
+        }));
     };
 }
 
