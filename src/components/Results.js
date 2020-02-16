@@ -15,7 +15,7 @@ const Results = ({userAnswers, score, restartQuiz}) => {
             <h2>Quiz Results</h2>
             <div>You answered...</div>
             {triesMarkup}
-            <div className="results-total">Your Total Score is <strong>{score}</strong>.</div>
+            <div className="results-total">Your Total Score is <strong>{score}</strong> of <strong>{userAnswers.length * 10}</strong>.</div>
             <a onClick={restartQuiz}>Restart Quiz</a>
         </div>
     );

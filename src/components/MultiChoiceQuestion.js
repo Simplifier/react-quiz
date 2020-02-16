@@ -31,25 +31,25 @@ class MultiChoiceQuestion extends React.Component {
                         />
                     ))}
                 </div>
-                <button className="submit-answer" onClick={this.#handleAnswerClick}>Submit</button>
+                <button className="submit-answer" onClick={this.#handleSubmitClick}>Submit</button>
             </li>
         );
     }
 
     #handleAnswerChange = index => checked => {
         this.selectedAnswers[index] = {index, checked};
-        this.setState(() => ({
+        this.setState({
             answerGiven: false
-        }));
+        });
     };
 
-    #handleAnswerClick = e => {
+    #handleSubmitClick = e => {
         const selected = this.selectedAnswers.filter(a => a.checked).map(a => a.index);
         const isCorrect = this.props.handleMultiAnswer(selected);
-        this.setState(() => ({
+        this.setState({
             answerGiven: true,
             isCorrect
-        }));
+        });
     };
 }
 

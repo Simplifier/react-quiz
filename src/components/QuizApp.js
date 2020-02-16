@@ -7,6 +7,7 @@ import shuffleQuestions from '../helpers/shuffleQuestions';
 import QUESTION_DATA from '../data/quiz-data';
 import sortInOrder from "../helpers/sortInOrder";
 import QuestionType from "../data/QuestionType";
+import CodeAnswer from "./CodeAnswer";
 
 class QuizApp extends Component {
     state = {
@@ -24,6 +25,7 @@ class QuizApp extends Component {
             .map(q => ({...q})); // shallow copy
 
         QUESTIONS.forEach(q => {
+            q.answers = this.#templateCodeAnswers(q.codeAnswers, q.answers);
             if (!q.shuffle) {
                 return;
             }
@@ -51,6 +53,16 @@ class QuizApp extends Component {
                 points: ''
             }
         };
+    }
+
+    #templateCodeAnswers(codeAnswers, answers) {
+        if (!codeAnswers) {
+            return answers;
+        }
+
+        return codeAnswers.options.map(a => (
+            <CodeAnswer lang={codeAnswers.lang} answer={a}/>
+        ));
     }
 
     handleSingleAnswer = (selectedIndex) => {
