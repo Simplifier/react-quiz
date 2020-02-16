@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import SingleAnswer from './SingleAnswer';
 
 class SingleChoiceQuestion extends React.Component {
+    selectedAnswers = [];
+
     render() {
         let {question, answers} = this.props;
         return (
@@ -10,18 +12,18 @@ class SingleChoiceQuestion extends React.Component {
                 <h2 className="question-title">
                     {question}
                 </h2>
-                <ul className="question-answers" tabIndex="-1">
+                <ul className={`question-answers ${this.selectedAnswers.indexOf(true) !== -1 ? 'right' : ''}`} tabIndex="-1">
                     {answers.map((answer, index) => {
+                        let correctnessClass = '';
+                        if (index in this.selectedAnswers) {
+                            correctnessClass = this.selectedAnswers[index] ? 'right' : 'wrong';
+                        }
                         return (
                             <SingleAnswer
                                 key={JSON.stringify(answer.props.children)}
                                 answer={answer}
                                 handleAnswerClick={this.#handleAnswerClick(index)}
-                                handleEnterPress={(e) => {
-                                    if (e.keyCode === 13) {
-                                        this.#handleAnswerClick(index)(e);
-                                    }
-                                }}
+                                correctnessClass={correctnessClass}
                             />
                         );
                     })}
@@ -30,19 +32,10 @@ class SingleChoiceQuestion extends React.Component {
         );
     }
 
-    #handleAnswerClick = (index) => (e) => {
-        const isCorrect = this.props.handleSingleAnswer(index);
-
-        if (e.target.nodeName === 'LI'){
-            if (isCorrect) {
-                // Prevent other answers from being clicked after correct answer is clicked
-                e.target.parentNode.style.pointerEvents = 'none';
-
-                e.target.classList.add('right');
-            } else {
-                e.target.style.pointerEvents = 'none';
-                e.target.classList.add('wrong');
-            }
+    #handleAnswerClick = index => e => {
+        if (e.target.nodeName === 'LI') {
+            const isCorrect = this.props.handleSingleAnswer(index);
+            this.selectedAnswers[index] = isCorrect;
         }
     };
 }

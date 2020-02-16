@@ -269,11 +269,15 @@ pre[class*="language-"] {
     animation: shake 0.5s cubic-bezier(.35, .05, .20, .99) both;
 }
 
+.question-answer.wrong {
+    pointer-events: none;
+}
+
 .question-answer.right, .question.right .multi-answers {
     background: rgba(135, 211, 124, .5);
 }
 
-.question.right {
+.question.right, .question-answers.right {
     pointer-events: none;
 }
 
