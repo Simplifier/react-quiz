@@ -23,7 +23,7 @@ class SingleChoiceQuestion extends React.Component {
                     {answers.map((answer, index) => {
                         return (
                             <SingleAnswer
-                                key={JSON.stringify(answer.props.children)}
+                                key={index}
                                 answer={answer}
                                 handleAnswerClick={this.#handleAnswerClick(index)}
                                 correctnessClass={selectedAnswers[index]}

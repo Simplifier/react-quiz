@@ -19,7 +19,7 @@ const SingleAnswer = ({answer, handleAnswerClick, correctnessClass}) => {
 };
 
 SingleAnswer.propTypes = {
-    answer: PropTypes.element.isRequired,
+    answer: PropTypes.node.isRequired,
     handleAnswerClick: PropTypes.func.isRequired,
     correctnessClass: PropTypes.string.isRequired,
 };

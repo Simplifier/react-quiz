@@ -219,10 +219,10 @@ vectorB.x = 10;`
             </div>,
 
         answers: [
-            <span>5</span>,
-            <span>10</span>,
-            <span>15</span>,
-            <span>Выдаст ошибку</span>,
+            '5',
+            '10',
+            '15',
+            'Выдаст ошибку',
         ],
         correct: 0,
         shuffle: true
@@ -256,10 +256,10 @@ vectorB.x = vectorA.x;`
             </div>,
 
         answers: [
-            <span>5</span>,
-            <span>10</span>,
-            <span>0</span>,
-            <span>Выдаст ошибку</span>,
+            '5',
+            '10',
+            '0',
+            'Выдаст ошибку',
         ],
         correct: 0,
         shuffle: true
@@ -293,10 +293,10 @@ vectorB.x = 10;`
             </div>,
 
         answers: [
-            <span>5</span>,
-            <span>10</span>,
-            <span>0</span>,
-            <span>Выдаст ошибку</span>,
+            '5',
+            '10',
+            '0',
+            'Выдаст ошибку',
         ],
         correct: 1,
         shuffle: true
@@ -323,10 +323,10 @@ print(vector.x);`
             </div>,
 
         answers: [
-            <span>5</span>,
-            <span>10</span>,
-            <span>0</span>,
-            <span>Выдаст ошибку</span>,
+            '5',
+            '10',
+            '0',
+            'Выдаст ошибку',
         ],
         correct: 3,
         shuffle: true

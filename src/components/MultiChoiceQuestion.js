@@ -25,7 +25,7 @@ class MultiChoiceQuestion extends React.Component {
                 <div className="multi-answers" tabIndex="-1">
                     {answers.map((answer, index) => (
                         <MultiAnswer
-                            key={JSON.stringify(answer.props.children)}
+                            key={index}
                             answer={answer}
                             handleAnswerChange={this.#handleAnswerChange(index)}
                         />
