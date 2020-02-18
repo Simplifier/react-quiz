@@ -30,10 +30,9 @@ h2 {
     margin: 0 0 15px;
 }
 
-header {
+.wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding-top: 20px;
 }
 
@@ -90,7 +89,11 @@ pre[class*="language-"] {
 
 .questions {
     width: 85%;
-    margin: 35px auto 0;
+    margin: auto;
+}
+
+.question-list {
+    margin: 0;
 }
 
 .question {
