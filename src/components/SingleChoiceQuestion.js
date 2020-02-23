@@ -20,16 +20,14 @@ class SingleChoiceQuestion extends React.Component {
                     {question}
                 </h2>
                 <ul className={`question-answers ${this.#isComplete() ? 'right' : ''}`} tabIndex="-1">
-                    {answers.map((answer, index) => {
-                        return (
-                            <SingleAnswer
-                                key={index}
-                                answer={answer}
-                                handleAnswerClick={this.#handleAnswerClick(index)}
-                                correctnessClass={selectedAnswers[index]}
-                            />
-                        );
-                    })}
+                    {answers.map((answer, index) => (
+                        <SingleAnswer
+                            key={index}
+                            answer={answer}
+                            handleAnswerClick={this.#handleAnswerClick(index)}
+                            correctnessClass={selectedAnswers[index]}
+                        />
+                    ))}
                 </ul>
             </li>
         );

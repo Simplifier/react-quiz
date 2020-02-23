@@ -15,9 +15,8 @@ class QuestionList extends React.Component {
         let {questions, handleSingleAnswer, handleMultiAnswer} = this.props;
         return (
             <ul className="question-list">
-                {questions.map(question => {
-                    return (
-                        question.type === QuestionType.SINGLE ?
+                {questions.map(question => (
+                    question.type === QuestionType.SINGLE ?
                         <SingleChoiceQuestion
                             key={ReactDOMServer.renderToString(question.question)}
                             question={question.question}
@@ -30,8 +29,7 @@ class QuestionList extends React.Component {
                             answers={question.answers}
                             handleMultiAnswer={handleMultiAnswer}
                         />
-                    );
-                })}
+                ))}
             </ul>
         );
     }
