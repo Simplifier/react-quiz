@@ -44,7 +44,7 @@ class SingleChoiceQuestion extends React.Component {
 
     #isComplete = () => {
         const {selectedAnswers} = this.state;
-        return selectedAnswers.indexOf(true) !== -1;
+        return selectedAnswers.indexOf('right') !== -1;
     };
 }
 
