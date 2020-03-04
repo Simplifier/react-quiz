@@ -14,15 +14,3 @@ $ cd react-quiz
 $ npm install
 $ npm start
 ```
-
-App Structure
--------------
-
-```
-QuizApp
-└── Quiz
-    ├── QuestionList
-    |   └── Question
-    |       └── Answer
-    └── Results
-```
